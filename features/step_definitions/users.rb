@@ -10,4 +10,4 @@ Dado('que o usuario consulte informacoes de funcionario') do
   Entao('uma lista de funcionarios deve retornar') do
     expect(@list_people.code).to eql 200
     expect(@list_people.message).to eql 'OK'
-  end
+  end 
