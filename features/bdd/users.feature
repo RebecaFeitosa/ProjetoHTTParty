@@ -3,7 +3,7 @@
 Funcionalidade: Pesquisar Usuarios
     Para averiguar informacoes
     O usuario do sistema
-    Deseja poder consultar informacoes dos usuarios 
+    Deseja poder consultar informacoes dos usuario 
 
     Cenario: Buscar informacoes de usuarios
         Dado que o usuario consulte informacoes de usuarios

@@ -4,10 +4,10 @@ Dado('que o usuario consulte informacoes de usuarios') do
   end
   # Atribui a resposta da requisição (armazenada em @get_url) à variável @list_people
   Quando('ele realizar a pesquisa') do
-    @list_people = @get_url
+    @list_users = @get_url
   end
   # Verifica se o código de status da resposta é 200 (sucesso) e se a mensagem de status é 'OK'
   Entao('uma lista de usuarios deve retornar') do
-    expect(@list_people.code).to eql 200
-    expect(@list_people.message).to eql 'OK'
+    expect(@list_users.code).to eql 200
+    expect(@list_users.message).to eql 'OK'
   end 
