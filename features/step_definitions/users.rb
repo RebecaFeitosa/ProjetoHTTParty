@@ -24,9 +24,6 @@ Dado('que o usuario consulte informacoes de usuarios') do
         "age": 25,
         "gender": "male"
       }.to_json)
-
-      puts @create_user
-      
     end
     
     Entao('esse usuario sera cadastrado') do
