@@ -14,23 +14,24 @@ Dado('que o usuario consulte informacoes de usuarios') do
   end 
 
   # Cenario dois, fazendo a requisição no passo "Quando"
-Dado('que o usuario cadastre um novo usuario') do
-    @post_url = 'https://reqres.in/api/users'
-end
-  #:headers=> {'Content-Type': 'application/json'} tira os scapes (barras invertidas) do response
-  Quando('ele enviar as informacoes do usuario') do
-    @create_user = HTTParty.post(@post_url, :headers=> {'Content-Type': 'application/json'}, body:{
-      "name": "Luke Skywalker",
-      "age": 25,
-      "gender": "male"
-  }.to_json)
+  Dado('que o usuario cadastre um novo usuario') do
+      @post_url = 'https://reqres.in/api/users'
+  end
+    #:headers=> {'Content-Type': 'application/json'} tira os scapes (barras invertidas) do response
+    Quando('ele enviar as informacoes do usuario') do
+      @create_user = HTTParty.post(@post_url, :headers=> {'Content-Type': 'application/json'}, body:{
+        "name": "Luke Skywalker",
+        "age": 25,
+        "gender": "male"
+      }.to_json)
 
-    puts @create_user
-  end
-  
-  Entao('esse usuario sera cadastrado') do
-    expect(@create_user.code).to eql (201)
-    expect(@create_user.message).to eql 'Created'
-    expect(@create_user["name"]).to eql 'Luke Skywalker'
-    expect(@create_user["age"]).to eql (25)
-  end
+      puts @create_user
+      
+    end
+    
+    Entao('esse usuario sera cadastrado') do
+      expect(@create_user.code).to eql (201)
+      expect(@create_user.message).to eql 'Created'
+      expect(@create_user["name"]).to eql 'Luke Skywalker'
+      expect(@create_user["age"]).to eql (25)
+    end
