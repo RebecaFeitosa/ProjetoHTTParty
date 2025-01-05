@@ -21,7 +21,7 @@ end
   Quando('ele enviar as informacoes do usuario') do
     @create_user = HTTParty.post(@post_url, :headers=> {'Content-Type': 'application/json'}, body:{
       "name": "Luke Skywalker",
-      "age": "25",
+      "age": 25,
       "gender": "male"
   }.to_json)
 
@@ -29,8 +29,8 @@ end
   end
   
   Entao('esse usuario sera cadastrado') do
-    puts @create_user.code
-    puts @create_user.message
-    puts @create_user["status"]
-
+    expect(@create_user.code).to eql (201)
+    expect(@create_user.message).to eql 'Created'
+    expect(@create_user["name"]).to eql 'Luke Skywalker'
+    expect(@create_user["age"]).to eql (25)
   end
