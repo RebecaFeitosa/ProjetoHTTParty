@@ -17,9 +17,9 @@ Dado('que o usuario consulte informacoes de usuarios') do
 Dado('que o usuario cadastre um novo usuario') do
     @post_url = 'https://reqres.in/api/users'
 end
-  
+  #:headers=> {'Content-Type': 'application/json'} tira os scapes (barras invertidas) do response
   Quando('ele enviar as informacoes do usuario') do
-    @create_user = HTTParty.post(@post_url, body:{
+    @create_user = HTTParty.post(@post_url, :headers=> {'Content-Type': 'application/json'}, body:{
       "name": "Luke Skywalker",
       "age": "25",
       "gender": "male"
@@ -29,5 +29,8 @@ end
   end
   
   Entao('esse usuario sera cadastrado') do
-    
+    puts @create_user.code
+    puts @create_user.message
+    puts @create_user["status"]
+
   end
