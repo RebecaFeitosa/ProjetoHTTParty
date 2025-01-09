@@ -2,11 +2,11 @@
 # Realiza a requisição GET na URL da API e armazena a resposta em @get_url
   # Método GET
 Dado('que o usuario consulte informacoes de usuarios') do
-    @get_url = HTTParty.get('https://reqres.in/api/users')
+    @get_url = '/users'
   end
   # Atribui a resposta da requisição (armazenada em @get_url) à variável @list_users
   Quando('ele realizar a pesquisa') do
-    @list_users = @get_url
+    @list_users = User.get(@get_url)
   end
   # Verifica se o código de status da resposta é 200 (sucesso) e se a mensagem de status é 'OK'
   Entao('uma lista de usuarios deve retornar') do
@@ -17,11 +17,11 @@ Dado('que o usuario consulte informacoes de usuarios') do
   # Cenario dois, fazendo a requisição no passo "Quando"
   # Método POST
   Dado('que o usuario cadastre um novo usuario') do
-      @post_url = 'https://reqres.in/api/users'
+      @post_url = '/users'
   end
     #:headers=> {'Content-Type': 'application/json'} tira os scapes (barras invertidas) do response
     Quando('ele enviar as informacoes do usuario') do
-      @create_user = HTTParty.post(@post_url, :headers=> {'Content-Type': 'application/json'}, body:{
+      @create_user = User.post(@post_url, body:{
         "name": "Luke Skywalker",
         "age": 25,
         "gender": "male"
@@ -39,13 +39,13 @@ Dado('que o usuario consulte informacoes de usuarios') do
   # O ideal seria que o id nao fosse fixo, fazer um get primeiro e depois o put em cima do retorno do response do get
   # Fiz algo parecido porque essa api nao permite isso
     Dado('que o usuario altere as informacoes de um usuario existente') do
-      @get_user = HTTParty.get('https://reqres.in/api/users', :headers => {'Content-Type': 'application/json'})
+      @get_user = User.get('/users')
       puts @get_user['data'][0]['id']
-      @put_url = 'https://reqres.in/api/users/' + @get_user['data'][0]['id'].to_s
+      @put_url = '/users/' + @get_user['data'][0]['id'].to_s
     end
     
       Quando('ele enviar as novas informacoes') do
-        @update_user = HTTParty.put(@put_url, :headers => {'Content-Type': 'application/json'}, body: {
+        @update_user = User.put(@put_url, body: {
           "name": "Luciano",
           "age": 32,
           "gender": "male"
@@ -63,12 +63,12 @@ Dado('que o usuario consulte informacoes de usuarios') do
 
     #Método delete
     Dado('que o usuario queira deletar as informacoes de um usuario existente') do
-      @get_user = HTTParty.get('https://reqres.in/api/users', :headers => {'Content-Type': 'application/json'})
-      @delete_url = 'https://reqres.in/api/users/' + @get_user['data'][0]['id'].to_s
+      @get_user = User.get('/users')
+      @delete_url = '/users/' + @get_user['data'][0]['id'].to_s
     end
     
       Quando('ele enviar a identificacao unica') do
-        @delete_user = HTTParty.delete(@delete_url, :headers => {'Content-Type': 'application/json'})
+        @delete_user = User.delete(@delete_url)
         puts "Status Code: #{@delete_user.code}" # Exibe apenas o código de status, para não exibir todas as linhas teste apenas puts @delete_user
       end
       
