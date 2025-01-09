@@ -25,4 +25,9 @@ class User_Requests
           }.to_json)
     end
 
+    # Path do delete
+    def delete_user(id)
+        User.delete('/users/' + id.to_s)
+    end
+
 end

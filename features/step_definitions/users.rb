@@ -51,14 +51,13 @@ Dado('que o usuario consulte informacoes de usuarios') do
         expect(@update_user["age"]).to eql (32)
       end
 
-    #Método delete
+    # Método delete
     Dado('que o usuario queira deletar as informacoes de um usuario existente') do
-      @get_user = User.get('/users')
-      @delete_url = '/users/' + @get_user['data'][0]['id'].to_s
+      @request = User_Requests.new
     end
     
       Quando('ele enviar a identificacao unica') do
-        @delete_user = User.delete(@delete_url)
+        @delete_user = @request.delete_user(@request.find_user['data'][0]['id'])
         puts "Status Code: #{@delete_user.code}" # Exibe apenas o código de status, para não exibir todas as linhas teste apenas puts @delete_user
       end
       
