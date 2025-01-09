@@ -35,15 +35,24 @@ Dado('que o usuario consulte informacoes de usuarios') do
       expect(@create_user["age"]).to eql (25)
     end
 
-
+  # Método PUT
     Dado('que o usuario altere as informacoes de um usuario existente') do
-      
+      @put_url = 'https://reqres.in/api/users/2'
     end
     
-    Quando('ele enviar as novas informacoes') do
+      Quando('ele enviar as novas informacoes') do
+        @update_user = HTTParty.put(@put_url, :headers => {'Content-Type': 'application/json'}, body: {
+          "name": "Luciano",
+          "age": 32,
+          "gender": "male"
+        }.to_json)
+
+        puts(@update_user)
+      end
       
-    end
-    
-    Entao('as informacoes serao alteradas') do
-      
-    end
+      Entao('as informacoes serao alteradas') do
+        expect(@update_user.code).to eql (200)
+        expect(@update_user.msg).to eql 'OK'
+        expect(@update_user["name"]).to eql 'Luciano'
+        expect(@update_user["age"]).to eql (32)
+      end
