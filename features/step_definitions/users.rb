@@ -36,8 +36,12 @@ Dado('que o usuario consulte informacoes de usuarios') do
     end
 
   # Método PUT
+  # O ideal seria fazer um get primeiro e depois o put em cima do retorno do response do get
+  # Fiz algo parecido porque essa api nao permite isso
     Dado('que o usuario altere as informacoes de um usuario existente') do
-      @put_url = 'https://reqres.in/api/users/2'
+      @get_user = HTTParty.get('https://reqres.in/api/users', :headers => {'Content-Type': 'application/json'})
+      puts @get_user['data'][0]['id']
+      @put_url = 'https://reqres.in/api/users/' + @get_user['data'][0]['id'].to_s
     end
     
       Quando('ele enviar as novas informacoes') do
