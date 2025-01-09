@@ -36,7 +36,7 @@ Dado('que o usuario consulte informacoes de usuarios') do
     end
 
   # Método PUT
-  # O ideal seria fazer um get primeiro e depois o put em cima do retorno do response do get
+  # O ideal seria que o id nao fosse fixo, fazer um get primeiro e depois o put em cima do retorno do response do get
   # Fiz algo parecido porque essa api nao permite isso
     Dado('que o usuario altere as informacoes de um usuario existente') do
       @get_user = HTTParty.get('https://reqres.in/api/users', :headers => {'Content-Type': 'application/json'})
