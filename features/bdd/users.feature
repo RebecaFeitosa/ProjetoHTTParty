@@ -5,6 +5,7 @@ Funcionalidade: Pesquisar Usuarios
     O usuario do sistema
     Deseja poder consultar informacoes dos usuario 
 
+    @cenario_um
     Cenario: Buscar informacoes de usuarios
         Dado que o usuario consulte informacoes de usuarios
         Quando ele realizar a pesquisa

@@ -2,11 +2,11 @@
 # Realiza a requisição GET na URL da API e armazena a resposta em @get_url
   # Método GET
 Dado('que o usuario consulte informacoes de usuarios') do
-    @get_url = '/users'
+    @getlist = User_Requests.new
   end
   # Atribui a resposta da requisição (armazenada em @get_url) à variável @list_users
   Quando('ele realizar a pesquisa') do
-    @list_users = User.get(@get_url)
+    @list_users = @getlist.find_user
   end
   # Verifica se o código de status da resposta é 200 (sucesso) e se a mensagem de status é 'OK'
   Entao('uma lista de usuarios deve retornar') do
@@ -17,22 +17,19 @@ Dado('que o usuario consulte informacoes de usuarios') do
   # Cenario dois, fazendo a requisição no passo "Quando"
   # Método POST
   Dado('que o usuario cadastre um novo usuario') do
-      @post_url = '/users'
+      @create = User_Requests.new
   end
     #:headers=> {'Content-Type': 'application/json'} tira os scapes (barras invertidas) do response
     Quando('ele enviar as informacoes do usuario') do
-      @create_user = User.post(@post_url, body:{
-        "name": "Luke Skywalker",
-        "age": 25,
-        "gender": "male"
-      }.to_json)
+      @create_user = @create.create_user('Luke', 28, 'masculino')
+      puts @create_user
     end
     
     Entao('esse usuario sera cadastrado') do
       expect(@create_user.code).to eql (201)
       expect(@create_user.message).to eql 'Created'
-      expect(@create_user["name"]).to eql 'Luke Skywalker'
-      expect(@create_user["age"]).to eql (25)
+      expect(@create_user["name"]).to eql 'Luke'
+      expect(@create_user["age"]).to eql (28)
     end
 
   # Método PUT
