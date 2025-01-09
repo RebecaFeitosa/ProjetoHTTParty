@@ -1,5 +1,6 @@
 # Fazendo a requisição no passo "Dado"
 # Realiza a requisição GET na URL da API e armazena a resposta em @get_url
+  # Método GET
 Dado('que o usuario consulte informacoes de usuarios') do
     @get_url = HTTParty.get('https://swapi.py4e.com/api/people/')
   end
@@ -14,6 +15,7 @@ Dado('que o usuario consulte informacoes de usuarios') do
   end 
 
   # Cenario dois, fazendo a requisição no passo "Quando"
+  # Método POST
   Dado('que o usuario cadastre um novo usuario') do
       @post_url = 'https://reqres.in/api/users'
   end
@@ -31,4 +33,17 @@ Dado('que o usuario consulte informacoes de usuarios') do
       expect(@create_user.message).to eql 'Created'
       expect(@create_user["name"]).to eql 'Luke Skywalker'
       expect(@create_user["age"]).to eql (25)
+    end
+
+
+    Dado('que o usuario altere as informacoes de um usuario existente') do
+      
+    end
+    
+    Quando('ele enviar as novas informacoes') do
+      
+    end
+    
+    Entao('as informacoes serao alteradas') do
+      
     end
