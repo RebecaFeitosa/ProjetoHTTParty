@@ -36,9 +36,9 @@ Dado('que o usuario consulte informacoes de usuarios') do
   # O ideal seria que o id nao fosse fixo, fazer um get primeiro e depois o put em cima do retorno do response do get
   # Fiz algo parecido porque essa api nao permite isso
     Dado('que o usuario altere as informacoes de um usuario existente') do
-      @get_user = User.get('/users')
+      @getlist = User_Requests.new
       puts @get_user['data'][0]['id']
-      @put_url = '/users/' + @get_user['data'][0]['id'].to_s
+      @put_url = '/users/' + @getlist.find_user['data'][0]['id'].to_s
     end
     
       Quando('ele enviar as novas informacoes') do

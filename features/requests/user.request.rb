@@ -16,4 +16,13 @@ class User_Requests
           }.to_json)
     end
 
+    # Path do put
+    def update_user(id, name, age, gender)
+        User.put('/users' + id.to_s, body:{
+            "name": name,
+            "age": age,
+            "gender": gender
+          }.to_json)
+    end
+
 end
