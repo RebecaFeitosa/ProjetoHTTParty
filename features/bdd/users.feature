@@ -15,3 +15,9 @@ Funcionalidade: Pesquisar Usuarios
         Dado que o usuario cadastre um novo usuario
         Quando ele enviar as informacoes do usuario
         Entao esse usuario sera cadastrado
+
+    @cenario_tres
+    Cenario: Alterar informacoes cadastrais
+        Dado que o usuario altere as informacoes de um usuario existente
+        Quando ele enviar as novas informacoes
+        Entao as informacoes serao alteradas
