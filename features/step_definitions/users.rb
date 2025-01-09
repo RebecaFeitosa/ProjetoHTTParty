@@ -36,19 +36,11 @@ Dado('que o usuario consulte informacoes de usuarios') do
   # O ideal seria que o id nao fosse fixo, fazer um get primeiro e depois o put em cima do retorno do response do get
   # Fiz algo parecido porque essa api nao permite isso
     Dado('que o usuario altere as informacoes de um usuario existente') do
-      @getlist = User_Requests.new
-      puts @get_user['data'][0]['id']
-      @put_url = '/users/' + @getlist.find_user['data'][0]['id'].to_s
+      @request = User_Requests.new
     end
     
       Quando('ele enviar as novas informacoes') do
-        @update_user = User.put(@put_url, body: {
-          "name": "Luciano",
-          "age": 32,
-          "gender": "male"
-        }.to_json)
-
-        puts(@update_user)
+        @update_user = @request.update_user(@request.find_user['data'][0]['id'], 'Luciano', 32, 'masculino')
       end
       
       Entao('as informacoes serao alteradas') do

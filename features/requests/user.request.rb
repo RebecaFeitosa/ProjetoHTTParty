@@ -16,9 +16,9 @@ class User_Requests
           }.to_json)
     end
 
-    # Path do put
+    # Path do put (estava dando erro, a unica coisa que resolveu foi por a / depois de users)
     def update_user(id, name, age, gender)
-        User.put('/users' + id.to_s, body:{
+        User.put('/users/' + id.to_s, body:{
             "name": name,
             "age": age,
             "gender": gender
