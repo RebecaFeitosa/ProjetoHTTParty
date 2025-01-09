@@ -41,6 +41,7 @@ Dado('que o usuario consulte informacoes de usuarios') do
     
       Quando('ele enviar as novas informacoes') do
         @update_user = @request.update_user(@request.find_user['data'][0]['id'], 'Luciano', 32, 'masculino')
+        puts @update_user
       end
       
       Entao('as informacoes serao alteradas') do
