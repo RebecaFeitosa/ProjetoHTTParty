@@ -60,3 +60,20 @@ Dado('que o usuario consulte informacoes de usuarios') do
         expect(@update_user["name"]).to eql 'Luciano'
         expect(@update_user["age"]).to eql (32)
       end
+
+    #Método delete
+    Dado('que o usuario queira deletar as informacoes de um usuario existente') do
+      @get_user = HTTParty.get('https://reqres.in/api/users', :headers => {'Content-Type': 'application/json'})
+      @delete_url = 'https://reqres.in/api/users/' + @get_user['data'][0]['id'].to_s
+    end
+    
+      Quando('ele enviar a identificacao unica') do
+        @delete_user = HTTParty.delete(@delete_url, :headers => {'Content-Type': 'application/json'})
+        puts "Status Code: #{@delete_user.code}" # Exibe apenas o código de status, para não exibir todas as linhas teste apenas puts @delete_user
+      end
+      
+      Entao('esse usuario sera deletado do sistema') do
+        expect(@delete_user.code).to eql (204)
+        expect(@delete_user.msg).to eql 'No Content'
+        puts "Usuário deletado com sucesso!" if @delete_user.code == 204
+      end
