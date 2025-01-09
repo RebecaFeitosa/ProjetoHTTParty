@@ -21,3 +21,9 @@ Funcionalidade: Pesquisar Usuarios
         Dado que o usuario altere as informacoes de um usuario existente
         Quando ele enviar as novas informacoes
         Entao as informacoes serao alteradas
+
+    @cenario_quatro
+    Cenario: Deletar informacoes cadastrais
+        Dado que o usuario queira deletar as informacoes de um usuario existente
+        Quando ele enviar a identificacao unica
+        Entao esse usuario sera deletado do sistema
