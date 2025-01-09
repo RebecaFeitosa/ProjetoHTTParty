@@ -2,9 +2,9 @@
 # Realiza a requisição GET na URL da API e armazena a resposta em @get_url
   # Método GET
 Dado('que o usuario consulte informacoes de usuarios') do
-    @get_url = HTTParty.get('https://swapi.py4e.com/api/people/')
+    @get_url = HTTParty.get('https://reqres.in/api/users')
   end
-  # Atribui a resposta da requisição (armazenada em @get_url) à variável @list_people
+  # Atribui a resposta da requisição (armazenada em @get_url) à variável @list_users
   Quando('ele realizar a pesquisa') do
     @list_users = @get_url
   end
