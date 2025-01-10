@@ -18,6 +18,7 @@ Dado('que o usuario consulte informacoes de usuarios') do
   # Método POST
   Dado('que o usuario cadastre um novo usuario') do
       @create = User_Requests.new
+      @assert = Assertions.new
   end
     #:headers=> {'Content-Type': 'application/json'} tira os scapes (barras invertidas) do response
     Quando('ele enviar as informacoes do usuario') do
@@ -26,8 +27,7 @@ Dado('que o usuario consulte informacoes de usuarios') do
     end
     
     Entao('esse usuario sera cadastrado') do
-      expect(@create_user.code).to eql (201)
-      expect(@create_user.message).to eql 'Created'
+      @assert.request_success_post(@create_user.code, @create_user.message)
       expect(@create_user["name"]).to eql (DATABASE[:name][:name5])
       expect(@create_user["age"]).to eql (DATABASE[:age][:age5])
       expect(@create_user["salary"]).to eql (DATABASE[:salary][:salary5])
