@@ -14,22 +14,23 @@ Dado('que o usuario consulte informacoes de usuarios') do
     expect(@list_users.message).to eql 'OK'
   end 
 
-  # Cenario dois, fazendo a requisição no passo "Quando"
+  # Cenario dois, fazendo a requisição no passo "Quando". Criando informações dinamicas
   # Método POST
   Dado('que o usuario cadastre um novo usuario') do
       @create = User_Requests.new
   end
     #:headers=> {'Content-Type': 'application/json'} tira os scapes (barras invertidas) do response
     Quando('ele enviar as informacoes do usuario') do
-      @create_user = @create.create_user(DATABASE[:name][:name1],DATABASE[:age][:age1], DATABASE[:gender][:gender1])
+      @create_user = @create.create_user(DATABASE[:name][:name5],DATABASE[:age][:age5], DATABASE[:salary][:salary5])
       puts @create_user
     end
     
     Entao('esse usuario sera cadastrado') do
       expect(@create_user.code).to eql (201)
       expect(@create_user.message).to eql 'Created'
-      expect(@create_user["name"]).to eql (DATABASE[:name][:name1])
-      expect(@create_user["age"]).to eql (DATABASE[:age][:age1])
+      expect(@create_user["name"]).to eql (DATABASE[:name][:name5])
+      expect(@create_user["age"]).to eql (DATABASE[:age][:age5])
+      expect(@create_user["salary"]).to eql (DATABASE[:salary][:salary5])
     end
 
   # Método PUT

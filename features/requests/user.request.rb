@@ -8,20 +8,20 @@ class User_Requests
     end
 
     # Path do post, onde ele aceita valores ao ser acessado, para não deixar valores fixos
-    def create_user(name, age, gender)
+    def create_user(name, age, salary)
         User.post('/users', body:{
             "name": name,
             "age": age,
-            "gender": gender
+            "salary": salary
           }.to_json)
     end
 
     # Path do put (estava dando erro, a unica coisa que resolveu foi por a / depois de users)
-    def update_user(id, name, age, gender)
+    def update_user(id, name, age, salary)
         User.put('/users/' + id.to_s, body:{
             "name": name,
             "age": age,
-            "gender": gender
+            "gender": salary
           }.to_json)
     end
 
