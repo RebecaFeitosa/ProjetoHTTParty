@@ -21,15 +21,15 @@ Dado('que o usuario consulte informacoes de usuarios') do
   end
     #:headers=> {'Content-Type': 'application/json'} tira os scapes (barras invertidas) do response
     Quando('ele enviar as informacoes do usuario') do
-      @create_user = @create.create_user('Luke', 28, 'masculino')
+      @create_user = @create.create_user(DATABASE[:name][:name1],DATABASE[:age][:age1], DATABASE[:gender][:gender1])
       puts @create_user
     end
     
     Entao('esse usuario sera cadastrado') do
       expect(@create_user.code).to eql (201)
       expect(@create_user.message).to eql 'Created'
-      expect(@create_user["name"]).to eql 'Luke'
-      expect(@create_user["age"]).to eql (28)
+      expect(@create_user["name"]).to eql (DATABASE[:name][:name1])
+      expect(@create_user["age"]).to eql (DATABASE[:age][:age1])
     end
 
   # Método PUT
